@@ -109,18 +109,18 @@ const googleAuthHandler = asyncHandler(async (req, res) => {
 
 const registerUser = asyncHandler(async (req, res) => {
     // Get data from the request
-    const { username, phone, email,password, gender, age, pincode, state,caste } = req.body;
+    const { username, email,password } = req.body;
 
     // Check for existing user using username and phone
     const existingUser = await User.findOne({
         $or: [
             { username: username.toLowerCase() },
-            { phone: phone }
+            { email: email.toLowerCase() }
         ],
     });
 
     if (existingUser) {
-        throw new ApiError(400, "User with username or phone already exists");
+        throw new ApiError(400, "User with username or email already exists");
     }
 
     // Handle avatar upload if present
@@ -140,14 +140,8 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         username: username.toLowerCase(),
 		email,
-        phone,
         password,
         avatar: avatarCloudUrl,
-        gender,
-        age,
-        pincode,
-        state,
-		caste,
     });
 
     // Check for the created user and exclude password and refreshToken

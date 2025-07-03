@@ -29,11 +29,11 @@ const signUp = async (data) => {
 };
 
 const updateUserData = async (data) => {
-	return await api.patch("/users/update-user-details", data);
+	return await api.post("/users/update-user-details", data);
 };
 
 const updateAvatar = async (data) => {
-	return await api.patch("/users/update-avatar", data, {
+	return await api.post("/users/update-avatar", data, {
         headers: {
             'Content-Type': 'multipart/form-data'
         }

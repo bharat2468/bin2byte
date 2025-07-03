@@ -12,12 +12,14 @@ import {
 	Login,
 	Signup,
 	Profile,
+	DonateFood,
+	GetFood,
+	About,
 } from "./pages/index.js";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import {
 	Error,
 	AdminDashboard,
-	Dashboard,
 	Users,
 	Protected,
 	Unauthorized,
@@ -26,17 +28,13 @@ import {
 const queryClient = new QueryClient();
 
 const nestedAdminRoute = {
-	path: "admin",
+	path: "/admin",
 	element: (
 		<Protected authentication={true} adminOnly={true}>
 			<AdminDashboard />
 		</Protected>
 	),
 	children: [
-		{
-			index: true,
-			element: <Dashboard />,
-		},
 		{
 			path: "users",
 			element: <Users />,
@@ -82,7 +80,30 @@ const router = createBrowserRouter([
 					</Protected>
 				),
 			},
-
+			{
+				path: "/donateFood",
+				element: (
+					<Protected authentication={true}>
+						<DonateFood />
+					</Protected>
+				),
+			},
+			{
+				path: "/findFood",
+				element: (
+					<Protected authentication={true}>
+						<GetFood />
+					</Protected>
+				),
+			},
+			{
+				path: "/about",
+				element: (
+					<Protected authentication={true}>
+						<About />
+					</Protected>
+				),
+			},
 			nestedAdminRoute,
 		],
 	},

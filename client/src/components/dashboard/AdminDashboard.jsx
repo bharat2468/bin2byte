@@ -23,9 +23,6 @@ function AdminDashboard() {
 					{/* Sidebar content here */}
 					<>
 						<li>
-							<Link to="/admin">Dashboard</Link>
-						</li>
-						<li>
 							<Link to="/admin/users">Users</Link>
 						</li>
 					</>

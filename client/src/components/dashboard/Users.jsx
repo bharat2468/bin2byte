@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { FaCheck, FaTimes, FaTrash } from "react-icons/fa";
-import { allUsers, adminDeleteUser} from "../../api/users";
+import { allUsers, adminDeleteUser } from "../../api/users";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Loading, Error } from "../index";
 import { format } from "date-fns";
+import { useSelector } from "react-redux";
 
 const Users = () => {
+	// Sample user data
+
 	const queryClient = useQueryClient();
 	const [successMessage, setSuccessMessage] = useState("");
+	const loggedInUser = useSelector((state) => state.auth.user);
 
 	const {
 		isLoading,
@@ -47,6 +51,7 @@ const Users = () => {
 
 	const users = response?.data?.data;
 
+	// Sample delete handler
 	const handleDelete = (userId) => {
 		if (
 			window.confirm(
@@ -58,7 +63,7 @@ const Users = () => {
 	};
 
 	return (
-		<div className="overflow-x-auto">
+		<div className="overflow-x-auto min-h-screen">
 			{successMessage && (
 				<div className="alert alert-success my-5">
 					<div>
@@ -81,7 +86,11 @@ const Users = () => {
 					{users.map((user) => (
 						<tr key={user._id} className="hover">
 							<td>
-								{format(new Date(user.createdAt), "dd-MM-yyyy")}
+								{user.createdAt &&
+									format(
+										new Date(user.createdAt),
+										"dd-MM-yyyy"
+									)}
 							</td>
 							<td>
 								<div className="avatar">
@@ -109,7 +118,10 @@ const Users = () => {
 								<button
 									className="btn btn-error btn-sm"
 									onClick={() => handleDelete(user._id)}
-									disabled={isDeleting}>
+									disabled={
+										isDeleting ||
+										user.username === loggedInUser.username
+									}>
 									<FaTrash />
 								</button>
 							</td>

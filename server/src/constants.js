@@ -1,1 +1,1 @@
-export const DB_NAME = "hackathon-database"
+export const DB_NAME = "hungry-database"

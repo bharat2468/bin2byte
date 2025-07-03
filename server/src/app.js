@@ -24,14 +24,11 @@ app.use(express.static("public"));
 
 // !routes import
 import userRoutes from "./routes/user.routes.js";
-import workerRoutes from "./routes/worker.routes.js"
-import schemeRoutes from "./routes/scheme.routes.js"
-
+import foodRoutes from "./routes/food.routes.js";
 
 // !routes declare
 app.use("/api/v1/users", userRoutes);
-app.use("/api/v1/worker", workerRoutes);
-app.use("/api/v1/scheme", schemeRoutes);
+app.use("/api/v1/food", foodRoutes);
 
 app.use(errorMiddleware);
 
