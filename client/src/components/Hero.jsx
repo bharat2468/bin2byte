@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { GoArrowRight } from "react-icons/go";
 import Container from "./Container";
 import { useSelector } from "react-redux";
-import { HeroImage } from "../../public"; // Ensure this is imported correctly
+import { HeroImage, LogoImage } from "../../public"; // Ensure both are in public folder or imported as assets
 import { Services } from "./";
 
 const Hero = () => {
@@ -20,29 +20,23 @@ const Hero = () => {
 
 				<Container className="relative z-10 flex items-center h-full px-6 md:px-12">
 					<div className="max-w-2xl text-left space-y-6">
-						<h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-primary-foreground">
+						{/* ✅ Logo on top */}
+						<img
+							src={LogoImage}
+							alt="Bin2Byte Logo"
+							className="h-24 sm:h-14 md:h-16 mb-2"
+						/>
+
+						<h1 className="text-4xl sm:text-5xl md:text-6xl font-bold leading-tight text-primary-foreground drop-shadow-sm">
 							Share Food. Spread Joy.
 						</h1>
 
-						<p className="text-lg sm:text-xl text-primary-foreground/90">
+						<p className="text-lg sm:text-xl text-primary-foreground/90 drop-shadow-sm">
 							Welcome to <span className="font-semibold text-primary">bin2byte</span> — where we turn leftovers into lifelines.
 							Post your extra meals or find free food near you.
 						</p>
 
-						{/* <div className="flex flex-wrap gap-4">
-							<Link
-								to="/donateFood"
-								className="btn btn-primary px-6 py-3 gap-2 text-sm sm:text-base"
-							>
-								Donate Food <GoArrowRight />
-							</Link>
-							<Link
-								to="/findFood"
-								className="btn btn-outline border-primary text-primary hover:bg-primary hover:text-white px-6 py-3 gap-2 text-sm sm:text-base"
-							>
-								Get Food <GoArrowRight />
-							</Link>
-						</div> */}
+						
 					</div>
 				</Container>
 			</section>
