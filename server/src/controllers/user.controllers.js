@@ -84,6 +84,7 @@ const googleAuthHandler = asyncHandler(async (req, res) => {
 	const options = {
 		httpOnly: true,
 		secure: true,
+		sameSite: 'None',
 	};
 
 	const userObject = user.toObject();
@@ -199,6 +200,7 @@ const loginUser = asyncHandler(async (req, res) => {
 	const options = {
 		httpOnly: true,
 		secure: true,
+		sameSite: 'None',
 	};
 
 	const userObject = user.toObject(); // Convert to plain object
@@ -243,6 +245,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 	const options = {
 		httpOnly: true,
 		secure: true,
+		sameSite: 'None',
 	};
 
 	return res
@@ -346,9 +349,10 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 			await generateAccessAndRefreshToken(user._id);
 
 		const options = {
-			httpOnly: true,
-			secure: true,
-		};
+		httpOnly: true,
+		secure: true,
+		sameSite: 'None',
+	};
 
 		res.status(200)
 			.cookie("accessToken", accessToken, options)
