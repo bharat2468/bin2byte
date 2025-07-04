@@ -1,6 +1,6 @@
 import { Header, Footer, Loading } from "./components";
 import { Outlet } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { getCurrentUser, refreshToken } from "./api/users";
 import { login, logout } from "./store/authSlice";
@@ -10,7 +10,9 @@ import { ChatBot } from "./components"; // ✅ Import your ChatBot component
 import { IoChatbubblesOutline } from "react-icons/io5"; // Chat icon
 import FloatingChat from "./components/chatbot/FloatingChatbot";
 
+
 function App() {
+	const authStatus = useSelector((state) => state.auth.status);
 	const dispatch = useDispatch();
 	const queryClient = useQueryClient();
 	const [isChatOpen, setIsChatOpen] = useState(false);
@@ -77,7 +79,7 @@ function App() {
 			<Outlet />
 			<Footer />
 
-			<FloatingChat />
+			{authStatus && <FloatingChat />}
 		</div>
 	);
 }

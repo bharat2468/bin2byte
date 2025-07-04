@@ -21,6 +21,10 @@ app.use(cookieParser());
 app.use(express.json({ limit: "160kb" }));
 app.use(express.urlencoded({ extended: true, limit: "160kb" }));
 app.use(express.static("public"));
+	
+app.get("/", (req, res) => {
+	res.send("API is running....");
+});
 
 // !routes import
 import userRoutes from "./routes/user.routes.js";
